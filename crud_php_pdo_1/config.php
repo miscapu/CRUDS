@@ -19,7 +19,7 @@ try {
     /**
      * Connection PDO
      */
-    $dbConn =   new PDO( "mysql:host='.$databaseHost.';dbname='.$databaseName.'", $databaseUser, $databasePass );
+    $dbConn =   new PDO( "mysql:host={$databaseHost};dbname={$databaseName}", $databaseUser, $databasePass );
     // Set Attribute ERRMODE: Error reporting mode PDO
     // Throws PDOException
     $dbConn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );

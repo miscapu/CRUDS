@@ -10,6 +10,24 @@
 3.
  ==========================
  -->
+
+<?php
+/**
+ * ==========================
+ * Starting Application
+ * @var PDO $dbConn
+ * ==========================
+ */
+
+// Including the database connection file
+include_once ( 'config.php' );
+
+/*
+ * fetching data in descending order( latest entry list )
+ */
+$result = $dbConn->query( "SELECT * FROM users ORDER BY id DESC" );
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,7 +41,35 @@
 
     <h1>Crud PHP & MySQL</h1>
 
+    <a href="add.html">Add New Data</a>
+    <br>
 
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Email</td>
+        </tr>
+
+        <!-- Dynamic Content -->
+        <?php
+        /**
+         * PDOStatement::fetch: Fetch the next line from the result set
+         * PDO::Fetch_Assoc: return an array indexed by column name as returned
+         * in result set.
+         */
+            while( $row =   $result->fetch( PDO::FETCH_ASSOC ) ):
+                echo "<tr>";
+                echo "<td>".$row[ 'name' ]."</td>";
+                echo "<td>".$row[ 'phone' ]."</td>";
+                echo "<td>".$row[ 'email' ]."</td>";
+                echo "</tr>";
+
+
+            endwhile;
+
+        ?>
+    </table>
 
 </body>
 </html>
